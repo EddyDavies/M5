@@ -3,13 +3,13 @@
     "title": "Incident Tracker",
     "description": "A schema for The University of Manchester incident reporting system",
     "definitions": {
-      "external_address" : {
+      "address" : {
         "type": "object",
         "properties": {
           "address_id": {
             "description": "The address id used to attach off-campus address to people or incidents",
             "type": "string",
-            "pattern": "^[e|E][0-9]{8}$"
+            "pattern": "^[o|O][0-9]{8}$"
           },
           "street_address" : {
             "type": "object",
@@ -106,13 +106,13 @@
         ],
         "additionalProperties":false
       },
-      "internal_address" : {
+      "campus_rooms" : {
         "type": "object",
           "properties": {
           "address_id": {
-            "description": "The address id used to attach campus address to people or incidents",
+            "description": "The address id used to attach campus rooms to people or incidents",
             "type": "string",
-            "pattern": "^[i|I][0-9]{8}$"
+            "pattern": "^[c|C][0-9]{8}$"
           },
           "room_code": {
             "description": "The room identifying code following university naming convention",
@@ -144,15 +144,14 @@
         "type": "object",
         "properties": {
           "person_id": {
-            "description": "The unique identifier for an individual",
-            "type": "integer",
-            "pattern": "^[0-9]*$"
+            "description": "The unique identifier for an individual to connect it to the incident objects",
+            "type": "string",
+            "pattern": "[p|P][0-9]{8}$"
           },
           "first_name": {
             "description": "The individuals first name with support for international names.",
             "type": "string",
             "pattern": "^[a-zA-Z0-9_]*$"
-  
           },
           "middle_names": {
             "description": "Any middle names an individual has with support for international names.",
@@ -164,14 +163,28 @@
             "type": "string",
             "pattern": "^[a-zA-Z0-9_]*$"
           },
+          "status": {
+            "description": "The individuals status, as staff, student, guest, etc.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_]*$"
+          },
+          "job_title": {
+            "description": "The individuals job title if a staff member.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_]*$"
+          },
+          "manager": {
+            "description": "The individuals line manager if an employee.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_]*$"
+          },
           "address": {
-            "description": "The individuals last name",
+            "description": "The individuals last name with support for international names.",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/address"
+              "$ref": "#/address"
+            }
             },
-            "uniqueItems": true
-          },
           "phone": {
             "description": "An array of the individual's phone number/s",
             "type": "array",
@@ -196,6 +209,16 @@
           "first_name"
         ],
         "additionalProperties":false
+      },
+      "incident": {
+        "type": "object",
+        "properties": {
+          "incident_id": {
+            "description": "The unique identifier for the incident",
+            "type": "string",
+            "pattern": "[i|I][0-9]{8}$"
+          }
+      }  
       }
     },
     "type": "object",
@@ -215,11 +238,11 @@
                 },
                 "address" : {
                     "type" : "array",
-                    "items": {"$ref": "#/definitions/external_address"}
+                    "items": {"$ref": "#/definitions/address"}
                 },
                 "campus_rooms" : {
                     "type" : "array",
-                    "items": {"$ref": "#/definitions/internal_address"}
+                    "items": {"$ref": "#/definitions/campus_room"}
                 }
                 },
                 "required": ["people", "incidents", "address", "campus_rooms"]
