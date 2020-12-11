@@ -19,42 +19,42 @@
                 "type": "number",
                 "pattern": "^[0-9]*$"
               },
-          "house_number": {
-            "description": "The house number",
-            "type": "number",
-            "pattern": "^[0-9]*$"
-          },
-          "house_number_suffix": {
-            "description": "Any letter that may be found following a house number",
-            "type": "string",
-            "pattern": "^[A-Za-z]"
-          },
-          "house_name": {
-            "description": "The house name that might be instead of or alongside the number",
-            "type": "string",
-            "pattern": "^([A-Z][a-z]*[ ]?)*"
-          },
-          "street_name": {
-            "description": "The name of the street such as baker, mill, barton",
-            "type": "string",
-            "pattern": "^([A-Z][a-z]*[ ]?)*"
-          },
-          "street_type": {
-            "description": "The name of the type of street, such as road, avenue, lane",
-            "type": "string"
-          },
-          "street_direction": {
-            "description": "The direction of the street, necessary for some addresses",
-            "type": "string",
-            "pattern": "^[A-Za-z]{1,2}"
-          },
-          "address_type": {
+              "house_number": {
+                "description": "The house number",
+                "type": "number",
+                "pattern": "^[0-9]*$"
+              },
+              "house_number_suffix": {
+                "description": "Any letter that may be found following a house number",
+                "type": "string",
+                "pattern": "^[A-Za-z]"
+              },
+              "house_name": {
+                "description": "The house name that might be instead of or alongside the number",
+                "type": "string",
+                "pattern": "^([A-Z][a-z]*[ ]?)*"
+              },
+              "street_name": {
+                "description": "The name of the street such as baker, mill, barton",
+                "type": "string",
+                "pattern": "^([A-Z][a-z]*[ ]?)*"
+              },
+              "street_type": {
+                "description": "The name of the type of street, such as road, avenue, lane",
+                "type": "string"
+              },
+              "street_direction": {
+                "description": "The direction of the street, necessary for some addresses",
+                "type": "string",
+                "pattern": "^[A-Za-z]{1,2}"
+              },
+              "address_type": {
                 "description": "The type of address such as Building, Office, Apartment ",
-            "type": "string",
-            "default": "House",
-            "pattern": "^([A-Z][a-z]*[ ]?)*"
+                "type": "string",
+                "default": "House",
+                "pattern": "^([A-Z][a-z]*[ ]?)*"
               }
-          },
+            },
             "oneOf": [ {
               "required": [
                 "house_number",
@@ -171,7 +171,7 @@
           "status": {
             "description": "The individuals status, as staff, student or guest",
             "type": "string",
-            "enum": ["Staff", "Student", "Guest"]
+            "enum": ["Staff", "Student", "Guest", "Contractor", "Other"]
           },
           "job_title": {
             "description": "The individuals job title for staff members.",
@@ -226,8 +226,57 @@
             "description": "The unique identifier for the incident",
             "type": "string",
             "pattern": "[i|I][0-9]{8}$"
-          }
-      }  
+          },
+          "type": {
+            "description": "The incident type .",
+            "type": "string",
+            "enum": ["Accident", "Ill Health", "Property Damage", "Fire", "Near Miss"]
+          },
+          "description": {
+            "description": "A description of what happended in the incident.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_]*$"
+  
+          },
+          "time": {
+            "description": "The exact time that the incident occured",
+            "type": "string",
+            "format": "time"
+          },
+          "incident_date": {
+            "description": "The date the incident occured on.",
+            "type": "string", 
+            "format": "date"
+          },
+          "report_date": {
+            "description": "The date the incident was reported on.",
+            "type": "string", 
+            "format": "date"
+          },
+          "location": {
+            "description": "A reference to either on campus room or off camous address.",
+            "type": "string",
+            "pattern": "^[i|I|e|E][0-9]{8}$"
+          },
+          "person_reporting": {
+            "description": "The unique identifier for the individual who is making this incident report",
+            "type": "string",
+            "pattern": "[p|P][0-9]{8}$"
+          },
+          "damage": {
+            "description": "A reference to either on campus room or off camous address.",
+            "$ref": "#/definitions/damage"
+          },
+          "injury": {
+            "description": "A reference to either on campus room or off camous address.",
+            "ref": "#/definitions/injury"
+        }},
+        "oneOf": [ {        
+          "required": ["damage", "incident_id", "description", "type", "time", "incident_date", "report_date", "location"]
+        },{
+          "required": ["injury", "incident_id", "description", "type", "time", "incident_date", "report_date", "location"]
+        }],
+        "additionalProperties":false
       }
     },
     "type": "object",
