@@ -32,13 +32,13 @@
         "incidents" : [
             {
                 "incident_id": "I00000003",
-                "type": "Near Miss",
+                "type": ["Near Miss"],
                 "description": "A box fell off of a badly hung shelf but did not hit anyone. We were on a school trip, visiting a debating event in sheffield.",
                 "time": "14:30:00",
                 "incident_date": "2020-09-23",
                 "report_date": "2020-09-28",
                 "location_id": "a74326547",
-                "reporter_ids": "P87965432",
+                "reporter_id": "P87965432",
                 "witness_ids": ["P87728832"]
             }
         ],

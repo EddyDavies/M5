@@ -1,0 +1,82 @@
+{  
+    "root" : {
+        "people": [{
+                "person_id":"P87688323",
+                "first_name":"Stevie",
+                "last_name": "Rogers",
+                "date_of_birth": "2/8/1995",
+                "status": "Student",
+                "phone":["+44 8145 450804"],
+                "email": ["Stevie.Rogers@undergraduate.manchester.ac.uk", "Rogers99@gmail.com"] 
+            },{
+                "person_id":"P34396237",
+                "first_name":"Billy",
+                "last_name": "Smith",
+                "date_of_birth": "2/8/1995",
+                "status": "Student",
+                "phone":["+44 4324 450675"],
+                "email": ["billy.smith-33@undergraduate.manchester.ac.uk", "smith.B.567@gmail.com"] 
+            },{
+                "person_id":"P80088324",
+                "first_name":"Stephanie",
+                "middle_names": ["Jenny", "Megan", "Wild"],
+                "last_name": "Bennett",
+                "date_of_birth": "2/8/1995",
+                "status": "Student",
+                "phone":["+44 5903 435793"],
+                "email": ["Stephanie.Bennett-12@undergraduate.manchester.ac.uk", "Jenny@wildMeg.com"] 
+            },{
+                "person_id":"P87965432",
+                "first_name":"James",
+                "last_name": "Popplestone",
+                "date_of_birth": "24/4/1988",
+                "status": "Staff",
+                "job_title": "Professor",
+                "manager": "P00042356",
+                "phone":["+44 7425 457782"],
+                "email": ["j.pops@manchester.ac.uk"] 
+            }, {
+                "person_id":"P00042356",
+                "first_name":"David",
+                "last_name": "Richards",
+                "date_of_birth": "10/03/1968",
+                "status": "Staff",
+                "job_title": "Head of Department",
+                "manager": "P00042356",
+                "phone": ["+44 161 275 4900"],
+                "email": ["dave.richards@manchester.ac.uk"] 
+            }],
+        "incidents" : [
+            {
+                "incident_id": "I00000017",
+                "type": ["Accident", "Property Damage"],
+                "description": "A glass window shattered when a bird flew into it. Some of the glass that went everywhere landed on ",
+                "time": "11:10:00",
+                "incident_date": "2020-10-03",
+                "report_date": "2020-10-10",
+                "location_id": "C59345912",
+                "reporter_id": "P87965432",
+                "witness_ids": ["P87688323", "P34396237"],
+                "damage": {
+                    "description": "Glass window smashed by bird flying into it",
+                    "repair_cost": 1000
+                },
+                "injury": {
+                    "injured_person" : "P80088324",
+                    "description": "Glass the fell from the broken window landed on the arm of the victim.",
+                    "severity": 7,
+                    "treatment": "Preasure applied to wound to stop bleeding while emergency service were called. Once bleeding slowed a bandage was applied and while they traveled to hospital for stiches.",
+                    "emergency_services": true,
+                    "abscence": true,
+                    "absence_length": 15
+                }
+            }
+        ],
+        "address" : [],
+        "campus_rooms" : [{
+            "address_id": "C59345912",
+              "room_code": "G.47",
+              "buiding_name": "Williamson Building"
+        }]
+    }
+}

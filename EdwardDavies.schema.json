@@ -117,7 +117,7 @@
           "room_code": {
             "description": "The room identifying code following university naming convention",
             "type": "string",
-            "pattern": "^[0-9A-Za-z]*$"
+            "pattern": "^[0-9A-Za-z.]*$"
           },
           "floor": {
             "description": "The floor number that the room is on",
@@ -133,11 +133,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "address_id",
-          "room_code",
-          "buiding_name"
-        ],
+        "required": ["address_id", "room_code", "buiding_name"],
         "additionalProperties":false
       },
       "person": {
@@ -155,7 +151,12 @@
           },
           "middle_names": {
             "description": "Any middle names an individual has.",
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[^ ]*$"
+            },
+            "uniqueItems": true
           },
           "last_name": {
             "description": "The individuals last name.",
@@ -227,8 +228,13 @@
           },
           "type": {
             "description": "The incident type .",
-            "type": "string",
-            "enum": ["Accident", "Ill Health", "Property Damage", "Fire", "Near Miss"]
+            "type" :"array",
+              "items" : { 
+                "type": "string",
+                "enum": ["Accident", "Ill Health", "Property Damage", "Fire", "Near Miss"]
+              },
+            "minItems" : 1,
+            "uniqueItems": true
           },
           "description": {
             "description": "A description of what happended in the incident.",
@@ -254,7 +260,7 @@
             "type": "string",
             "pattern": "^[c|C|a|A][0-9]{8}$"
           },
-          "reporter_ids": {
+          "reporter_id": {
             "description": "The unique identifier for the individual who is making this incident report",
             "type": "string",
             "pattern": "[p|P][0-9]{8}$"
@@ -277,7 +283,7 @@
             "description": "A reference to either on campus room or off camous address.",
             "ref": "#/definitions/injury"
         }},
-        "required": ["incident_id", "description", "type", "time", "incident_date", "report_date", "location_id","reporter_ids"],
+        "required": ["incident_id", "description", "type", "time", "incident_date", "report_date", "location_id","reporter_id"],
         "additionalProperties":false
       },
       "damage": {
@@ -288,8 +294,8 @@
             "type": "string"
           },
           "repair_cost": {
-            "description": "An estimate cost to repair the damage caused",
-            "type": "number"
+            "description": "An estimate cost to repair the damage caused in pounds",
+            "type": "integer"
           }
         },
         "required": ["description", "repair_cost"]
@@ -297,6 +303,11 @@
       "injury": {
         "type": "object",
         "properties": {
+          "injured_person": {
+            "description": "ID of the person injuried",
+            "type": "string",
+            "pattern": "[p|P][0-9]{8}$"
+          },
           "description": {
             "description": "A description of the injury that occurred",
             "type": "string"
@@ -325,7 +336,7 @@
             "minimum": 1
           }
         },
-        "required": ["description", "severity"]
+        "required": ["description", "severity", "emergency_services", "abscence"]
       }
     },
     "type": "object",
