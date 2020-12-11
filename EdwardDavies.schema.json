@@ -174,8 +174,7 @@
           },
           "job_title": {
             "description": "The individuals job title for staff members.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_]*$"
+            "type": "string"
           },
           "manager": {
             "description": "The person ID for the individuals line manager if they are a staff member.",
@@ -233,9 +232,7 @@
           },
           "description": {
             "description": "A description of what happended in the incident.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_]*$"
-  
+            "type": "string"  
           },
           "time": {
             "description": "The exact time that the incident occured",
@@ -280,7 +277,7 @@
             "description": "A reference to either on campus room or off camous address.",
             "ref": "#/definitions/injury"
         }},
-        "required": ["incident_id", "description", "type", "time", "incident_date", "report_date", "location"],
+        "required": ["incident_id", "description", "type", "time", "incident_date", "report_date", "location_id","reporter_ids"],
         "additionalProperties":false
       },
       "damage": {

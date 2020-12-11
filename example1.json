@@ -1,0 +1,62 @@
+{  
+    "root" : {
+        "people": [{
+                "person_id":"P87728832",
+                "first_name":"Dom",
+                "last_name": "Wood",
+                "date_of_birth": "2/8/1998",
+                "status": "Student",
+                "phone":["+44 8125 4509575"],
+                "email": ["dom.wood-5@postgraduate.manchester.ac.uk", "dom_woody567@gmail.com"] 
+            },{
+                "person_id":"P87965432",
+                "first_name":"James",
+                "last_name": "Popplestone",
+                "date_of_birth": "24/4/1988",
+                "status": "Staff",
+                "job_title": "Professor",
+                "manager": "P00042356",
+                "phone":["+44 7425 457782"],
+                "email": ["j.pops@manchester.ac.uk"] 
+            }, {
+                "person_id":"P00042356",
+                "first_name":"David",
+                "last_name": "Richards",
+                "date_of_birth": "10/03/1968",
+                "status": "Staff",
+                "job_title": "Head of Department",
+                "manager": "P00042356",
+                "phone": ["+44 161 275 4900"],
+                "email": ["dave.richards@manchester.ac.uk"] 
+            }],
+        "incidents" : [
+            {
+                "incident_id": "I00000003",
+                "type": "Near Miss",
+                "description": "A box fell off of a badly hung shelf but did not hit anyone. We were on a school trip, visiting a debating event in sheffield.",
+                "time": "14:30:00",
+                "incident_date": "2020-09-23",
+                "report_date": "2020-09-28",
+                "location_id": "a74326547",
+                "reporter_ids": "P87965432",
+                "witness_ids": ["P87728832"]
+            }
+        ],
+        "address" : [{
+            "address_id": "A74326547",
+            "street_address" : {
+                "house_number": 23,
+                "street_name": "Broxholme",
+                "street_type": "Road",
+                "address_type": "House"
+            },
+            "locality": "Woodseats",
+            "city": "Sheffield",
+            "governing_district":"Yorkshire",
+            "post_code": "S8 8TA",
+            "country": "UK"
+            }
+        ],
+        "campus_rooms" : []
+    }
+}
