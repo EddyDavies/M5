@@ -7,7 +7,7 @@
         "type": "object",
           "properties": {
             "address_id": {
-              "description": "The address id used to attach off-campusaddress to people or incidents",
+              "description": "The address id used to attach off-campus address to people or incidents",
               "type": "string",
               "pattern": "^[e|E][0-9]{8}$"
             },
@@ -64,7 +64,6 @@
             "description": "The city or town for this address",
             "type": "string",
             "pattern": "^([A-Z][a-z]*[ ]?)*"
-  
           },
           "governing_district": {
             "description": "The governing district, such as county, state or province this address is in",
@@ -201,9 +200,28 @@
     "type": "object",
     "properties": {
         "root" :{
+            "type" : "object",
+            "properties": {
+                "people" : {
           "type" :"array",
-          "items" : { "$ref": "#/definitions/person" },
+                    "items" : { "$ref": "#/definitions/person"},
+                    "minItems" : 1
+                },
+                "incidents" : {
+                    "type" : "array",
+                    "items": {"$ref": "#/definitions/incident"},
           "minItems" : 1
+                },
+                "address" : {
+                    "type" : "array",
+                    "items": {"$ref": "#/definitions/external_address"}
+                },
+                "campus_rooms" : {
+                    "type" : "array",
+                    "items": {"$ref": "#/definitions/internal_address"}
+                }
+                },
+                "required": ["people", "incidents", "address", "campus_rooms"]
           }},
       "required" : ["root"],
       "uniqueItems": true
