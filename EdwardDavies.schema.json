@@ -9,7 +9,7 @@
           "address_id": {
             "description": "The address id used to attach off-campus address to people or incidents",
             "type": "string",
-            "pattern": "^[o|O][0-9]{8}$"
+            "pattern": "^[a|A][0-9]{8}$"
           },
           "street_address" : {
             "type": "object",
@@ -186,12 +186,12 @@
           "address": {
             "description": "The ID number for individuals home address.",
             "type": "string",
-            "pattern": "[o|O][0-9]{8}$"
+            "pattern": "[a|A][0-9]{8}$"
           },
           "office": {
             "description": "The ID number for individuals office if they are memeber of staff with one.",
             "type": "string",
-            "pattern": "[i|I][0-9]{8}$"
+            "pattern": "[c|C][0-9]{8}$"
           },
           "phone": {
             "description": "An array of the individual's phone number/s",
@@ -256,7 +256,7 @@
           "location": {
             "description": "A reference to either on campus room or off camous address.",
             "type": "string",
-            "pattern": "^[i|I|e|E][0-9]{8}$"
+            "pattern": "^[c|C|a|A][0-9]{8}$"
           },
           "person_reporting": {
             "description": "The unique identifier for the individual who is making this incident report",
