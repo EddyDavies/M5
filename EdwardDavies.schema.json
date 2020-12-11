@@ -3,9 +3,14 @@
     "title": "Incident Tracker",
     "description": "A schema for The University of Manchester incident reporting system",
     "definitions": {
-      "off_campus_address" : {
+      "external_address" : {
         "type": "object",
           "properties": {
+            "address_id": {
+              "description": "The address id used to attach off-campusaddress to people or incidents",
+              "type": "string",
+              "pattern": "^[e|E][0-9]{8}$"
+            },
           "house_number": {
             "description": "The house number",
             "type": "number",
@@ -78,6 +83,7 @@
         },
         "oneOf": [ {
           "required": [
+            "address_id",
             "house_number",
             "street_name",
             "street_type",
@@ -87,6 +93,7 @@
             "country"
           ]},{
           "required": [
+            "address_id",
             "house_name",
             "street_name",
             "street_type",
@@ -98,9 +105,14 @@
         ],
         "additionalProperties":false
       },
-      "on_campus_room" : {
+      "internal_room" : {
         "type": "object",
           "properties": {
+            "address_id": {
+              "description": "The address id used to attach campus address to people or incidents",
+              "type": "string",
+              "pattern": "^[i|I][0-9]{8}$"
+            },
           "room_code": {
             "description": "The house number",
             "type": "string",
@@ -122,25 +134,9 @@
 
           }
         },
-        "oneOf": [ {
           "required": [
-            "house_number",
-            "street_name",
-            "street_type",
-            "city",
-            "governing_district",
-            "post_code",
-            "country"
-          ]},{
-          "required": [
-            "house_name",
-            "street_name",
-            "street_type",
-            "city",
-            "governing_district",
-            "post_code",
-            "country"
-          ]}
+        "room_code",
+        "buiding_name"
         ],
         "additionalProperties":false
       },
