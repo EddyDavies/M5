@@ -104,7 +104,7 @@
         ],
         "additionalProperties":false
       },
-      "internal_room" : {
+      "internal_address" : {
         "type": "object",
           "properties": {
             "address_id": {
@@ -113,7 +113,7 @@
               "pattern": "^[i|I][0-9]{8}$"
             },
           "room_code": {
-            "description": "The house number",
+            "description": "The room identifying code following university standardised naming convention",
             "type": "string",
             "pattern": "^[0-9A-Za-z]*$"
           },
@@ -125,15 +125,14 @@
           "buiding_name": {
             "description": "The building name that room is situated in",
             "type": "string"
-  
           },
           "department": {
             "description": "The department that the room is situated in",
             "type": "string"
-
           }
         },
           "required": [
+          "address_id",
         "room_code",
         "buiding_name"
         ],
