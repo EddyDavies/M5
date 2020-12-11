@@ -106,7 +106,7 @@
         ],
         "additionalProperties":false
       },
-      "campus_rooms" : {
+      "campus_room" : {
         "type": "object",
           "properties": {
           "address_id": {
@@ -167,9 +167,8 @@
             "type": "string",
             "pattern": "^([1-9]|0[1-9]|[12][0-9]|3[01])\/([1-9]|0[1-9]|1[012])\/(19|20)?[0-9]{2}$"
           },
-
           "status": {
-            "description": "The individuals status, as staff, student or guest",
+            "description": "The individuals status, as staff, student, guest, contractor or other",
             "type": "string",
             "enum": ["Staff", "Student", "Guest", "Contractor", "Other"]
           },
@@ -253,15 +252,25 @@
             "type": "string", 
             "format": "date"
           },
-          "location": {
+          "location_id": {
             "description": "A reference to either on campus room or off camous address.",
             "type": "string",
             "pattern": "^[c|C|a|A][0-9]{8}$"
           },
-          "person_reporting": {
+          "reporter_ids": {
             "description": "The unique identifier for the individual who is making this incident report",
             "type": "string",
             "pattern": "[p|P][0-9]{8}$"
+          },
+          "witness_ids": {
+            "description": "The unique identifier for the individual who is making this incident report",
+            "type" :"array",
+              "items" : { 
+                "type":"string",
+                "pattern": "[p|P][0-9]{8}$"
+              },
+            "minItems" : 1,
+            "uniqueItems": true
           },
           "damage": {
             "description": "A reference to either on campus room or off camous address.",
@@ -271,12 +280,55 @@
             "description": "A reference to either on campus room or off camous address.",
             "ref": "#/definitions/injury"
         }},
-        "oneOf": [ {        
-          "required": ["damage", "incident_id", "description", "type", "time", "incident_date", "report_date", "location"]
-        },{
-          "required": ["injury", "incident_id", "description", "type", "time", "incident_date", "report_date", "location"]
-        }],
+        "required": ["incident_id", "description", "type", "time", "incident_date", "report_date", "location"],
         "additionalProperties":false
+      },
+      "damage": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "description": "A description of the damage casued",
+            "type": "string"
+          },
+          "repair_cost": {
+            "description": "An estimate cost to repair the damage caused",
+            "type": "number"
+          }
+        },
+        "required": ["description", "repair_cost"]
+      },
+      "injury": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "description": "A description of the injury that occurred",
+            "type": "string"
+          },
+          "severity": {
+            "description": "A rough score of how bad the injury is out of 10 ",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "treatment": {
+            "description": "A description of the first aid treatment provided for the injury",
+            "type": "string"
+          },
+          "emergency_services": {
+            "description": "A boolean for whether the emergency service were called",
+            "type": "boolean"
+          },
+          "abscence": {
+            "description": "A boolean for whether the person took an abscence service were called",
+            "type": "boolean"
+          },
+          "absence_length": {
+            "description": "Amount of time taken off for injury in work days",
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": ["description", "severity"]
       }
     },
     "type": "object",
