@@ -5,12 +5,20 @@
     "definitions": {
       "external_address" : {
         "type": "object",
-          "properties": {
-            "address_id": {
-              "description": "The address id used to attach off-campus address to people or incidents",
-              "type": "string",
-              "pattern": "^[e|E][0-9]{8}$"
-            },
+        "properties": {
+          "address_id": {
+            "description": "The address id used to attach off-campus address to people or incidents",
+            "type": "string",
+            "pattern": "^[e|E][0-9]{8}$"
+          },
+          "street_address" : {
+            "type": "object",
+            "properties": {
+              "flat_number": {
+                "description": "The flat, office or apartment number",
+                "type": "number",
+                "pattern": "^[0-9]*$"
+              },
           "house_number": {
             "description": "The house number",
             "type": "number",
@@ -25,13 +33,11 @@
             "description": "The house name that might be instead of or alongside the number",
             "type": "string",
             "pattern": "^([A-Z][a-z]*[ ]?)*"
-  
           },
           "street_name": {
             "description": "The name of the street such as baker, mill, barton",
             "type": "string",
             "pattern": "^([A-Z][a-z]*[ ]?)*"
-  
           },
           "street_type": {
             "description": "The name of the type of street, such as road, avenue, lane",
@@ -43,22 +49,32 @@
             "pattern": "^[A-Za-z]{1,2}"
           },
           "address_type": {
-            "description": "The type of address such as Building, Office, PO Box, Apartment ",
+                "description": "The type of address such as Building, Office, Apartment ",
             "type": "string",
             "default": "House",
             "pattern": "^([A-Z][a-z]*[ ]?)*"
+              }
           },
-          "address_type_identifier": {
-            "description": "The Building number, PO Box number, Apartment floor etc",
-            "type": "string",
-            "default": "House",
-            "pattern": "^[0-9]*"
+            "oneOf": [ {
+              "required": [
+                "house_number",
+                "street_name",
+                "street_type",
+                "address_type"
+              ]},{
+              "required": [
+                "house_name",
+                "street_name",
+                "street_type",
+                "address_type"
+              ]}
+            ],
+            "additionalProperties":false
           },
           "locality": {
             "description": "The local area of this address, such as village or area of city",
             "type": "string",
             "pattern": "^([A-Z][a-z]*[ ]?)*"
-  
           },
           "city": {
             "description": "The city or town for this address",
@@ -80,40 +96,26 @@
             "type": "string"
           }
         },
-        "oneOf": [ {
-          "required": [
-            "address_id",
-            "house_number",
-            "street_name",
-            "street_type",
-            "city",
-            "governing_district",
-            "post_code",
-            "country"
-          ]},{
-          "required": [
-            "address_id",
-            "house_name",
-            "street_name",
-            "street_type",
-            "city",
-            "governing_district",
-            "post_code",
-            "country"
-          ]}
+        "required": [
+          "address_id",
+          "street_address",
+          "city",
+          "governing_district",
+          "post_code",
+          "country"
         ],
         "additionalProperties":false
       },
       "internal_address" : {
         "type": "object",
           "properties": {
-            "address_id": {
-              "description": "The address id used to attach campus address to people or incidents",
-              "type": "string",
-              "pattern": "^[i|I][0-9]{8}$"
-            },
+          "address_id": {
+            "description": "The address id used to attach campus address to people or incidents",
+            "type": "string",
+            "pattern": "^[i|I][0-9]{8}$"
+          },
           "room_code": {
-            "description": "The room identifying code following university standardised naming convention",
+            "description": "The room identifying code following university naming convention",
             "type": "string",
             "pattern": "^[0-9A-Za-z]*$"
           },
@@ -131,10 +133,10 @@
             "type": "string"
           }
         },
-          "required": [
+        "required": [
           "address_id",
-        "room_code",
-        "buiding_name"
+          "room_code",
+          "buiding_name"
         ],
         "additionalProperties":false
       },
@@ -202,14 +204,14 @@
             "type" : "object",
             "properties": {
                 "people" : {
-          "type" :"array",
+                    "type" :"array",
                     "items" : { "$ref": "#/definitions/person"},
                     "minItems" : 1
                 },
                 "incidents" : {
                     "type" : "array",
                     "items": {"$ref": "#/definitions/incident"},
-          "minItems" : 1
+                    "minItems" : 1
                 },
                 "address" : {
                     "type" : "array",
@@ -221,7 +223,7 @@
                 }
                 },
                 "required": ["people", "incidents", "address", "campus_rooms"]
-          }},
+            }},
       "required" : ["root"],
       "uniqueItems": true
   
