@@ -149,42 +149,50 @@
             "pattern": "[p|P][0-9]{8}$"
           },
           "first_name": {
-            "description": "The individuals first name with support for international names.",
+            "description": "The individuals first name.",
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_]*$"
+            "pattern": "^[^ ]*$"
           },
           "middle_names": {
-            "description": "Any middle names an individual has with support for international names.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_ ]*$"
+            "description": "Any middle names an individual has.",
+            "type": "string"
           },
           "last_name": {
-            "description": "The individuals last name with support for international names.",
+            "description": "The individuals last name.",
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_]*$"
+            "pattern": "^[^ ]*$"
           },
-          "status": {
-            "description": "The individuals status, as staff, student, guest, etc.",
+          "date_of_birth": {
+            "description": "The individuals Date of Birth.",
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_]*$"
+            "pattern": "^([1-9]|0[1-9]|[12][0-9]|3[01])\/([1-9]|0[1-9]|1[012])\/(19|20)?[0-9]{2}$"
+          },
+
+          "status": {
+            "description": "The individuals status, as staff, student or guest",
+            "type": "string",
+            "enum": ["Staff", "Student", "Guest"]
           },
           "job_title": {
-            "description": "The individuals job title if a staff member.",
+            "description": "The individuals job title for staff members.",
             "type": "string",
             "pattern": "^[a-zA-Z0-9_]*$"
           },
           "manager": {
-            "description": "The individuals line manager if an employee.",
+            "description": "The person ID for the individuals line manager if they are a staff member.",
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_]*$"
+            "pattern": "[p|P][0-9]{8}$"
           },
           "address": {
-            "description": "The individuals last name with support for international names.",
-            "type": "array",
-            "items": {
-              "$ref": "#/address"
-            }
-            },
+            "description": "The ID number for individuals home address.",
+            "type": "string",
+            "pattern": "[o|O][0-9]{8}$"
+          },
+          "office": {
+            "description": "The ID number for individuals office if they are memeber of staff with one.",
+            "type": "string",
+            "pattern": "[i|I][0-9]{8}$"
+          },
           "phone": {
             "description": "An array of the individual's phone number/s",
             "type": "array",
@@ -206,7 +214,8 @@
         },
         "required": [
           "person_id",
-          "first_name"
+          "first_name",
+          "status"
         ],
         "additionalProperties":false
       },
